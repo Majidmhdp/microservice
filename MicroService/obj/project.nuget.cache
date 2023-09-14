@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "YpPJjhgUNp5xJ/qYMKr9dOIkB44QPUgRzdt/HfACg0zJjs8Mz9W2NY+RrRN63ubmaim+iY2dGJ1yUo6CeuEmnA==",
+  "success": true,
+  "projectFilePath": "D:\\Project\\MicroService\\MicroService\\MicroService.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Majid\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.14\\microsoft.netcore.app.host.win-x64.5.0.14.nupkg.sha512"
+  ],
+  "logs": []
+}
