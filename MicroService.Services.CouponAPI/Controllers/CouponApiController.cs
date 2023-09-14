@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using MicroService.Services.CouponAPI.Data;
 using MicroService.Services.CouponAPI.Model;
+using MicroService.Services.CouponAPI.Model.Dto;
 using Microsoft.Extensions.Logging;
 
 namespace MicroService.Services.CouponAPI.Controllers
@@ -17,13 +20,17 @@ namespace MicroService.Services.CouponAPI.Controllers
     public class CouponApiController : ControllerBase
     {
         private readonly AppDbContext _db;
+        private ResponseDto _response;
 
-       
+        private IMapper _mapper;
+
         //private readonly ILogger<WeatherForecastController> _logger;
 
-        public CouponApiController(AppDbContext db)
+        public CouponApiController(AppDbContext db, IMapper mapper)
         {
             _db = db;
+            _mapper = mapper;
+            _response = new ResponseDto();
         }
 
         //private readonly ILogger<WeatherForecastController> _logger;
@@ -34,35 +41,112 @@ namespace MicroService.Services.CouponAPI.Controllers
         //}
 
         [HttpGet]
-        public IEnumerable<Coupon> Get()
+        public ResponseDto Get()
         {
             try
             {
-                IEnumerable<Coupon> objList = _db.Coupons.ToList();
-                return objList;
+                _response.Result = _mapper.Map<IEnumerable<CouponDto>>(_db.Coupons.ToList());
             }
             catch (Exception ex)
             {
-
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
             }
 
-            return null;
+            return _response;
         }
 
         [HttpGet]
         [Route("{id:int}")]
-        public Coupon Get(int id)
+        public ResponseDto Get(int id)
         {
             try
             {
-                return _db.Coupons.FirstOrDefault(s=>s.CouponId == id);
+                _response.Result = _mapper.Map<CouponDto>(_db.Coupons.FirstOrDefault(s=>s.CouponId == id));
             }
             catch (Exception ex)
             {
-
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
             }
 
-            return null;
+            return _response;
+        }
+
+        [HttpGet]
+        [Route("GetByCode/{code}")]
+        public ResponseDto Get(string code)
+        {
+            try
+            {
+                _response.Result = _mapper.Map<CouponDto>(_db.Coupons.FirstOrDefault(s => s.CouponCode.ToLower() == code.ToLower()));
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+
+            return _response;
+        }
+
+        [HttpPost]
+        public ResponseDto Post([FromBody] CouponDto couponDto)
+        {
+            try
+            {
+                var obj = _mapper.Map<Coupon>(couponDto);
+                _db.Coupons.Add(obj);
+                _db.SaveChanges();
+
+                _response.Result = couponDto;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+
+            return _response;
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public ResponseDto Delete(int id)
+        {
+            try
+            {
+                var obj = _db.Coupons.First(s => s.CouponId == id);
+                _db.Coupons.Remove(obj);
+                _db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+
+            return _response;
+        }
+
+        [HttpPut]
+        public ResponseDto Put([FromBody] CouponDto couponDto)
+        {
+            try
+            {
+                var obj = _mapper.Map<Coupon>(couponDto);
+                _db.Coupons.Update(obj);
+                _db.SaveChanges();
+
+                _response.Result = couponDto;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+
+            return _response;
         }
 
         //private static readonly string[] Summaries = new[]

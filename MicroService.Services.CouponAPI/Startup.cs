@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using MicroService.Services.CouponAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +26,7 @@ namespace MicroService.Services.CouponAPI
         }
 
         public IConfiguration Configuration { get; }
+        public IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -43,6 +45,8 @@ namespace MicroService.Services.CouponAPI
                 option.UseSqlServer(Configuration.GetValue<string>("ConnectionStrings:DefaultConnection"));
             });
 
+            services.AddSingleton(mapper);
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +71,8 @@ namespace MicroService.Services.CouponAPI
             });
 
             ApplyMigration(app.ApplicationServices);
+
+            
         }
 
         public void ApplyMigration(IServiceProvider serviceProvider)
