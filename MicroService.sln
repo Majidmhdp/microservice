@@ -13,7 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{52
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroService.Services.CouponAPI", "MicroService.Services.CouponAPI\MicroService.Services.CouponAPI.csproj", "{2074E2FB-5406-4496-8327-25CD61385E01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroService.Web", "MicroService.Web\MicroService.Web.csproj", "{FF59FFCB-E81A-42DA-8A19-ADE1C6B80656}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroService.Web", "MicroService.Web\MicroService.Web.csproj", "{FF59FFCB-E81A-42DA-8A19-ADE1C6B80656}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroService.Services.AuthAPI", "MicroService.Services.AuthAPI\MicroService.Services.AuthAPI.csproj", "{AB2C0D48-D386-438D-86CC-68AEB25B93D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{FF59FFCB-E81A-42DA-8A19-ADE1C6B80656}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF59FFCB-E81A-42DA-8A19-ADE1C6B80656}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF59FFCB-E81A-42DA-8A19-ADE1C6B80656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB2C0D48-D386-438D-86CC-68AEB25B93D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB2C0D48-D386-438D-86CC-68AEB25B93D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB2C0D48-D386-438D-86CC-68AEB25B93D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB2C0D48-D386-438D-86CC-68AEB25B93D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2074E2FB-5406-4496-8327-25CD61385E01} = {52D0C69A-5BF6-481A-8751-F0B3E7FAC018}
 		{FF59FFCB-E81A-42DA-8A19-ADE1C6B80656} = {B4861343-9167-458A-92E9-D78D0A11E04B}
+		{AB2C0D48-D386-438D-86CC-68AEB25B93D3} = {52D0C69A-5BF6-481A-8751-F0B3E7FAC018}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F974EF4-DC94-4F0E-B061-12F1F74F6E90}

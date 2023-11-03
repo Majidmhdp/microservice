@@ -10,7 +10,6 @@ D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\MicroService.Web.pdb
 D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\MicroService.Web.Views.dll
 D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\MicroService.Web.Views.pdb
 D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Newtonsoft.Json.dll
-D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\MicroService.Web.csproj.AssemblyReference.cache
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\MicroService.Web.GeneratedMSBuildEditorConfig.editorconfig
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\MicroService.Web.AssemblyInfoInputs.cache
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\MicroService.Web.AssemblyInfo.cs
@@ -42,3 +41,4 @@ D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Coupon\Cou
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Coupon\CouponCreate.cshtml.g.cs
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Coupon\CouponDelete.cshtml.g.cs
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Shared\_Notifications.cshtml.g.cs
+D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\MicroService.Web.csproj.AssemblyReference.cache
