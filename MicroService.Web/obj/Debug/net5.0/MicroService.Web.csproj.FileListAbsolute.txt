@@ -41,4 +41,13 @@ D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Coupon\Cou
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Coupon\CouponCreate.cshtml.g.cs
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Coupon\CouponDelete.cshtml.g.cs
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Shared\_Notifications.cshtml.g.cs
+D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Auth\Login.cshtml.g.cs
+D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Auth\Register.cshtml.g.cs
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\MicroService.Web.csproj.AssemblyReference.cache

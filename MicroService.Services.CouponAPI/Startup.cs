@@ -10,10 +10,13 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using MicroService.Services.CouponAPI.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace MicroService.Services.CouponAPI
 {
@@ -33,10 +36,37 @@ namespace MicroService.Services.CouponAPI
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "MicroService.Services.CouponAPI", Version = "v1" });
+            //});
+            services.AddSwaggerGen(option =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MicroService.Services.CouponAPI", Version = "v1" });
+                option.AddSecurityDefinition(name: JwtBearerDefaults.AuthenticationScheme,
+                    securityScheme: new OpenApiSecurityScheme
+                    {
+                        Name = "Authorization",
+                        Description =
+                            "Enter the Bearer Authorization string as following: `Bearer Generated_JWT-Token`",
+                        In = ParameterLocation.Header,
+                        Type = SecuritySchemeType.ApiKey,
+                        Scheme = "Bearer"
+                    });
+                option.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = JwtBearerDefaults.AuthenticationScheme
+                            }
+                        }, new string[]{}
+                    }
+                });
             });
+
             //var __x = Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value;
             //string dbConn2 = Configuration.GetValue<string>("ConnectionStrings:DefaultConnection");
 
@@ -44,6 +74,30 @@ namespace MicroService.Services.CouponAPI
             {
                 option.UseSqlServer(Configuration.GetValue<string>("ConnectionStrings:DefaultConnection"));
             });
+
+            var secret = Configuration.GetValue<string>("ApiSettings:JwtOptions:Secret");
+            var issuer = Configuration.GetValue<string>("ApiSettings:JwtOptions:Issuer");
+            var audience = Configuration.GetValue<string>("ApiSettings:JwtOptions:Audience");
+
+            var key = Encoding.ASCII.GetBytes(secret);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = true,
+                    ValidIssuer = issuer,
+                    ValidateAudience = true,
+                    ValidAudience = audience
+                };
+            });
+            services.AddAuthorization();
 
             services.AddSingleton(mapper);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -63,6 +117,7 @@ namespace MicroService.Services.CouponAPI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
