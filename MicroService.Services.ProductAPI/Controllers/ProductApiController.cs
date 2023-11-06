@@ -16,7 +16,6 @@ namespace MicroService.Services.ProductAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class ProductApiController : ControllerBase
     {
         private readonly AppDbContext _db;
