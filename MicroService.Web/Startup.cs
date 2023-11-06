@@ -32,14 +32,17 @@ namespace MicroService.Web
             services.AddHttpContextAccessor();
             services.AddHttpClient();
             services.AddHttpClient<ICouponService, CouponService>();
+            services.AddHttpClient<IProductService, ProductService>();
             services.AddHttpClient<IAuthService, AuthService>();
 
             SD.CouponApiBase = Configuration.GetValue<string>("ServiceUrls:CouponApi");
             SD.AuthApiBase = Configuration.GetValue<string>("ServiceUrls:AuthApi");
+            SD.ProductApiBase = Configuration.GetValue<string>("ServiceUrls:ProductApi");
 
             services.AddScoped<ITokenProvider, TokenProvider>();
             services.AddScoped<IBaseService, BaseService>();
             services.AddScoped<ICouponService, CouponService>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IAuthService, AuthService>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

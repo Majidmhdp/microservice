@@ -51,3 +51,7 @@ D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.IdentityMode
 D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\MicroService.Web.csproj.AssemblyReference.cache
+D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Product\ProductCreate.cshtml.g.cs
+D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Product\ProductDelete.cshtml.g.cs
+D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Product\ProductIndex.cshtml.g.cs
+D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Product\ProductEdit.cshtml.g.cs
