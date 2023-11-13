@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MicroService.Web.Model.Dto
+namespace MicroService.Web.Models
 {
     public class ResponseDto
     {

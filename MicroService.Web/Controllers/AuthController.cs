@@ -5,7 +5,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using MicroService.Web.Model.Dto;
 using MicroService.Web.Models;
 using MicroService.Web.Models.Utility;
 using MicroService.Web.Service.IService;

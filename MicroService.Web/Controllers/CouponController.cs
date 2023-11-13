@@ -3,8 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MicroService.Web.Model;
-using MicroService.Web.Model.Dto;
+using MicroService.Web.Models;
 using MicroService.Web.Service.IService;
 using Newtonsoft.Json;
 

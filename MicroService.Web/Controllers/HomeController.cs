@@ -4,9 +4,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
-using MicroService.Web.Model.Dto;
 using MicroService.Web.Service.IService;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
@@ -17,11 +17,13 @@ namespace MicroService.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService _productService;
+        private readonly ICartService _cartService;
 
-        public HomeController(ILogger<HomeController> logger, IProductService productService)
+        public HomeController(ILogger<HomeController> logger, IProductService productService, ICartService cartService)
         {
             _logger = logger;
             _productService = productService;
+            _cartService = cartService;
         }
 
         public async Task<IActionResult> Index()
@@ -46,7 +48,7 @@ namespace MicroService.Web.Controllers
         public async Task<IActionResult> ProductDetails(int productId)
         {
             ProductDto? model = new ProductDto();
-
+            
             ResponseDto? response = await _productService.GetProductByIdAsync(productId);
 
             if (response != null && response.IsSuccess)
@@ -59,6 +61,45 @@ namespace MicroService.Web.Controllers
             }
 
             return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ActionName("ProductDetails")]
+        public async Task<IActionResult> ProductDetails(ProductDto productDto)
+        {
+            CartDto cartDto = new CartDto()
+            {
+                CartHeader = new CartHeaderDto()
+                {
+                    UserId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sub)?.FirstOrDefault()?.Value
+                }
+            };
+
+            CartDetailsDto cartDetailsDto = new CartDetailsDto()
+            {
+                Count = productDto.Count,
+                ProductId = productDto.ProductId
+            };
+
+            cartDto.CartDetails = new List<CartDetailsDto>()
+            {
+                cartDetailsDto
+            };
+
+            ResponseDto? response = await _cartService.UpsertCartAsync(cartDto);
+
+            if (response != null && response.IsSuccess)
+            {
+                TempData["success"] = "Item added to shopping cart";
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                TempData["error"] = response?.Message;
+            }
+
+            return View(productDto);
         }
 
         public IActionResult Privacy()

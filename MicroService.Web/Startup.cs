@@ -33,15 +33,19 @@ namespace MicroService.Web
             services.AddHttpClient();
             services.AddHttpClient<ICouponService, CouponService>();
             services.AddHttpClient<IProductService, ProductService>();
+            services.AddHttpClient<ICartService, CartService>();
             services.AddHttpClient<IAuthService, AuthService>();
 
             SD.CouponApiBase = Configuration.GetValue<string>("ServiceUrls:CouponApi");
             SD.AuthApiBase = Configuration.GetValue<string>("ServiceUrls:AuthApi");
             SD.ProductApiBase = Configuration.GetValue<string>("ServiceUrls:ProductApi");
+            SD.ShoppingCartApiBase = Configuration.GetValue<string>("ServiceUrls:ShoppingCartApi");
 
+            
             services.AddScoped<ITokenProvider, TokenProvider>();
             services.AddScoped<IBaseService, BaseService>();
             services.AddScoped<ICouponService, CouponService>();
+            services.AddScoped<ICartService, CartService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IAuthService, AuthService>();
 

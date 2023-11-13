@@ -16,7 +16,7 @@ namespace MicroService.Services.CouponAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class CouponApiController : ControllerBase
     {
         private readonly AppDbContext _db;

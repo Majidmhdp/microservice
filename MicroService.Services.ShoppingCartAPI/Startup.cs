@@ -16,6 +16,7 @@ using AutoMapper;
 using MicroService.Services.ShoppingCartAPI.Data;
 using MicroService.Services.ShoppingCartAPI.Services;
 using MicroService.Services.ShoppingCartAPI.Services.IService;
+using MicroService.Services.ShoppingCartAPI.Utility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -68,12 +69,16 @@ namespace MicroService.Services.ShoppingCartAPI
             {
                 option.UseSqlServer(Configuration.GetValue<string>("ConnectionStrings:DefaultConnection"));
             });
+            services.AddHttpContextAccessor();
+            services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
 
             services.AddHttpClient("Product",
-                u => u.BaseAddress = new Uri(Configuration.GetValue<string>("ServiceUrls:ProductApi")));
+                u => u.BaseAddress = new Uri(Configuration.GetValue<string>("ServiceUrls:ProductApi")))
+                .AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
 
             services.AddHttpClient("Coupon",
-                u => u.BaseAddress = new Uri(Configuration.GetValue<string>("ServiceUrls:CouponApi")));
+                u => u.BaseAddress = new Uri(Configuration.GetValue<string>("ServiceUrls:CouponApi")))
+                .AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
             
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICouponService, CouponService>();

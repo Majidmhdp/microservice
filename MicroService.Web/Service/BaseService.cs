@@ -6,7 +6,6 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using MicroService.Web.Model.Dto;
 using MicroService.Web.Models;
 using MicroService.Web.Models.Utility;
 using Newtonsoft.Json;

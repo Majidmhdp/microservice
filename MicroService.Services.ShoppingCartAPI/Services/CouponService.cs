@@ -26,7 +26,7 @@ namespace MicroService.Services.ShoppingCartAPI.Services
             var apiContent = await response.Content.ReadAsStringAsync();
             var resp = JsonConvert.DeserializeObject<ResponseDto>(apiContent);
 
-            if (resp.IsSuccess)
+            if (resp != null && resp.IsSuccess)
             {
                 return JsonConvert.DeserializeObject<CouponDto> (Convert.ToString(resp.Result));
             }
