@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using MicroService.MessageBus;
 using MicroService.Services.ShoppingCartAPI.Data;
 using MicroService.Services.ShoppingCartAPI.Services;
 using MicroService.Services.ShoppingCartAPI.Services.IService;
@@ -79,7 +80,7 @@ namespace MicroService.Services.ShoppingCartAPI
             services.AddHttpClient("Coupon",
                 u => u.BaseAddress = new Uri(Configuration.GetValue<string>("ServiceUrls:CouponApi")))
                 .AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
-            
+            services.AddScoped<IMessageBus, MessageBus.MessageBus>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICouponService, CouponService>();
 

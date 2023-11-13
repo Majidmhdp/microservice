@@ -52,6 +52,21 @@ namespace MicroService.Web.Controllers
             return View();
         }
 
+        public async Task<IActionResult> EmailCart(CartDto cartDto)
+        {
+            var cart = await LoadCartDtoBaseOnLoggedImUser();
+            cart.CartHeader.Email = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Email)?.FirstOrDefault()?.Value;
+
+            ResponseDto? response = await _cartService.EmailCart(cartDto);
+            if (response != null && response.IsSuccess)
+            {
+                TempData["success"] = "Email will processed and sent shortly";
+                return RedirectToAction(nameof(CartIndex));
+            }
+
+            return View();
+        }
+
         public async Task<IActionResult> RemoveCoupon(CartDto cartDto)
         {
             cartDto.CartHeader.CouponCode = "";

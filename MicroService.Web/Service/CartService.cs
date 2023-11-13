@@ -56,5 +56,15 @@ namespace MicroService.Web.Service
                 Url = SD.ShoppingCartApiBase + "/api/cart/ApplyCoupon"
             });
         }
+
+        public async Task<ResponseDto> EmailCart(CartDto cartDto)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = SD.ApiType.POST,
+                Date = cartDto,
+                Url = SD.ShoppingCartApiBase + "/api/cart/EmailCartRequest"
+            });
+        }
     }
 }

@@ -65,3 +65,11 @@ D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\obj\Debug\net5.0\M
 D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\obj\Debug\net5.0\MicroService.Services.ShoppingCartAPI.genruntimeconfig.cache
 D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\bin\Debug\net5.0\Newtonsoft.Json.dll
 D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\obj\Debug\net5.0\MicroService.Services.ShoppingCartAPI.csproj.AssemblyReference.cache
+D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\bin\Debug\net5.0\Azure.Core.dll
+D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\bin\Debug\net5.0\Azure.Core.Amqp.dll
+D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\bin\Debug\net5.0\Azure.Messaging.ServiceBus.dll
+D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\bin\Debug\net5.0\Microsoft.Azure.Amqp.dll
+D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\bin\Debug\net5.0\System.Memory.Data.dll
+D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\bin\Debug\net5.0\MicroService.MessageBus.dll
+D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\bin\Debug\net5.0\MicroService.MessageBus.pdb

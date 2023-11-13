@@ -1,0 +1,12 @@
+D:\Project\MicroService\MicroService.MessageBus\bin\Debug\net5.0\MicroService.MessageBus.deps.json
+D:\Project\MicroService\MicroService.MessageBus\bin\Debug\net5.0\MicroService.MessageBus.dll
+D:\Project\MicroService\MicroService.MessageBus\bin\Debug\net5.0\ref\MicroService.MessageBus.dll
+D:\Project\MicroService\MicroService.MessageBus\bin\Debug\net5.0\MicroService.MessageBus.pdb
+D:\Project\MicroService\MicroService.MessageBus\obj\Debug\net5.0\MicroService.MessageBus.csproj.AssemblyReference.cache
+D:\Project\MicroService\MicroService.MessageBus\obj\Debug\net5.0\MicroService.MessageBus.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project\MicroService\MicroService.MessageBus\obj\Debug\net5.0\MicroService.MessageBus.AssemblyInfoInputs.cache
+D:\Project\MicroService\MicroService.MessageBus\obj\Debug\net5.0\MicroService.MessageBus.AssemblyInfo.cs
+D:\Project\MicroService\MicroService.MessageBus\obj\Debug\net5.0\MicroService.MessageBus.csproj.CoreCompileInputs.cache
+D:\Project\MicroService\MicroService.MessageBus\obj\Debug\net5.0\MicroService.MessageBus.dll
+D:\Project\MicroService\MicroService.MessageBus\obj\Debug\net5.0\ref\MicroService.MessageBus.dll
+D:\Project\MicroService\MicroService.MessageBus\obj\Debug\net5.0\MicroService.MessageBus.pdb
