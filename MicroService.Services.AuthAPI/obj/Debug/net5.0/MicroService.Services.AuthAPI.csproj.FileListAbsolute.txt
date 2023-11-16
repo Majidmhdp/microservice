@@ -69,3 +69,12 @@ D:\Project\MicroService\MicroService.Services.AuthAPI\bin\Debug\net5.0\Microsoft
 D:\Project\MicroService\MicroService.Services.AuthAPI\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
 D:\Project\MicroService\MicroService.Services.AuthAPI\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
 D:\Project\MicroService\MicroService.Services.AuthAPI\obj\Debug\net5.0\MicroService.Services.AuthAPI.csproj.AssemblyReference.cache
+D:\Project\MicroService\MicroService.Services.AuthAPI\bin\Debug\net5.0\Azure.Core.dll
+D:\Project\MicroService\MicroService.Services.AuthAPI\bin\Debug\net5.0\Azure.Core.Amqp.dll
+D:\Project\MicroService\MicroService.Services.AuthAPI\bin\Debug\net5.0\Azure.Messaging.ServiceBus.dll
+D:\Project\MicroService\MicroService.Services.AuthAPI\bin\Debug\net5.0\Microsoft.Azure.Amqp.dll
+D:\Project\MicroService\MicroService.Services.AuthAPI\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Project\MicroService\MicroService.Services.AuthAPI\bin\Debug\net5.0\Newtonsoft.Json.dll
+D:\Project\MicroService\MicroService.Services.AuthAPI\bin\Debug\net5.0\System.Memory.Data.dll
+D:\Project\MicroService\MicroService.Services.AuthAPI\bin\Debug\net5.0\MicroService.MessageBus.dll
+D:\Project\MicroService\MicroService.Services.AuthAPI\bin\Debug\net5.0\MicroService.MessageBus.pdb

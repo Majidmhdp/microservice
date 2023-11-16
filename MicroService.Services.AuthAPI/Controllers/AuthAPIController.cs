@@ -4,8 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MicroService.MessageBus;
 using MicroService.Services.AuthAPI.Model.Dto;
 using MicroService.Services.AuthAPI.Service.IService;
+using Microsoft.Extensions.Configuration;
 
 namespace MicroService.Services.AuthAPI.Controllers
 {
@@ -15,10 +17,14 @@ namespace MicroService.Services.AuthAPI.Controllers
     {
         private readonly IAuthService _authService;
         protected ResponseDto _response;
+        private readonly IMessageBus _messageBus;
+        private readonly IConfiguration _configuration;
 
-        public AuthAPIController(IAuthService authService)
+        public AuthAPIController(IAuthService authService, IMessageBus messageBus, IConfiguration configuration)
         {
             _authService = authService;
+            _messageBus = messageBus;
+            _configuration = configuration;
             _response = new ResponseDto();
         }
 
@@ -33,6 +39,8 @@ namespace MicroService.Services.AuthAPI.Controllers
                 _response.Message = errorMessage;
                 return BadRequest(_response);
             }
+
+            await _messageBus.PublicMessage(model.Email, _configuration.GetValue<string>("TopicAndQueueNames:RegisterUserQueue"));
 
             return Ok(_response);
         }

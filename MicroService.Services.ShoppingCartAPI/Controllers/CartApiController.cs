@@ -164,7 +164,7 @@ namespace MicroService.Services.ShoppingCartAPI.Controllers
         {
             try
             {
-                await _messageBus.PublicMessage(cartDto, _configuration.GetValue<string>("TopicAndQueueNames:EmailShoppingCart"));
+                await _messageBus.PublicMessage(cartDto, _configuration.GetValue<string>("TopicAndQueueNames:EmailShoppingCartQueue"));
                 await _db.SaveChangesAsync();
 
                 _response.Result = true;

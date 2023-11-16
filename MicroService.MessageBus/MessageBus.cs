@@ -11,18 +11,28 @@ namespace MicroService.MessageBus
         private string connectionString = "Azure Connection";
         public async Task PublicMessage(object message, string topic_Queue_Name)
         {
-            await using var client = new ServiceBusClient(connectionString);
-
-            ServiceBusSender sender = client.CreateSender(topic_Queue_Name);
-
             var jsonMessage = JsonConvert.SerializeObject(message);
-            ServiceBusMessage finalMessage = new ServiceBusMessage(Encoding.UTF8.GetBytes(jsonMessage))
-            {
-                CorrelationId = Guid.NewGuid().ToString()
-            };
+            
 
-            await sender.SendMessageAsync(finalMessage);
-            await client.DisposeAsync();
+            try
+            {
+                await using var client = new ServiceBusClient(connectionString);
+
+                ServiceBusSender sender = client.CreateSender(topic_Queue_Name);
+
+                ServiceBusMessage finalMessage = new ServiceBusMessage(Encoding.UTF8.GetBytes(jsonMessage))
+                {
+                    CorrelationId = Guid.NewGuid().ToString()
+                };
+
+                await sender.SendMessageAsync(finalMessage);
+                await client.DisposeAsync();
+            }
+            catch
+            {
+                Console.WriteLine(jsonMessage);
+                await Task.CompletedTask;
+            }
         }
     }
 }

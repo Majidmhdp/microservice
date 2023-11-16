@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MicroService.MessageBus;
 using MicroService.Services.AuthAPI.Data;
 using MicroService.Services.AuthAPI.Model;
 using MicroService.Services.AuthAPI.Models;
@@ -55,6 +56,8 @@ namespace MicroService.Services.AuthAPI
             
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<IAuthService, AuthService>();
+
+            services.AddScoped<IMessageBus, MessageBus.MessageBus>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
