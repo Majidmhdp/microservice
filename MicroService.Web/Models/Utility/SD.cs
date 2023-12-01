@@ -14,6 +14,8 @@ namespace MicroService.Web.Models.Utility
 
         public static string ShoppingCartApiBase { get; set; }
 
+        public static string OrderApiBase { get; set; }
+
         public const string RoleAdmin = "ADMIN";
         public const string RoleCustomer = "CUSTOMER";
 

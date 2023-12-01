@@ -35,19 +35,21 @@ namespace MicroService.Web
             services.AddHttpClient<IProductService, ProductService>();
             services.AddHttpClient<ICartService, CartService>();
             services.AddHttpClient<IAuthService, AuthService>();
+            services.AddHttpClient<IOrderService, OrderService>();
 
             SD.CouponApiBase = Configuration.GetValue<string>("ServiceUrls:CouponApi");
             SD.AuthApiBase = Configuration.GetValue<string>("ServiceUrls:AuthApi");
             SD.ProductApiBase = Configuration.GetValue<string>("ServiceUrls:ProductApi");
             SD.ShoppingCartApiBase = Configuration.GetValue<string>("ServiceUrls:ShoppingCartApi");
+            SD.OrderApiBase = Configuration.GetValue<string>("ServiceUrls:OrderApi");
 
-            
             services.AddScoped<ITokenProvider, TokenProvider>();
             services.AddScoped<IBaseService, BaseService>();
             services.AddScoped<ICouponService, CouponService>();
             services.AddScoped<ICartService, CartService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(option =>

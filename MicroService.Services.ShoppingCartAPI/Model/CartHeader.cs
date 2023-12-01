@@ -18,9 +18,11 @@ namespace MicroService.Services.ShoppingCartAPI.Model
         public double Discount { get; set; }
         public double CartTotal { get; set; }
 
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
+        [NotMapped]
+        public string? Name { get; set; }
+        [NotMapped]
         public string? Phone { get; set; }
+        [NotMapped]
         public string? Email { get; set; }
     }
 }
