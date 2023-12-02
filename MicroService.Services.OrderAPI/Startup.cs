@@ -14,12 +14,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MicroService.MessageBus;
 using MicroService.Services.OrderAPI.Data;
-using MicroService.Services.OrderAPI.Services;
 using MicroService.Services.OrderAPI.Services.IService;
 using MicroService.Services.OrderAPI.Utility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Stripe;
+using ProductService = MicroService.Services.OrderAPI.Services.ProductService;
 
 namespace MicroService.Services.OrderAPI
 {
@@ -106,6 +107,8 @@ namespace MicroService.Services.OrderAPI
             {
                 endpoints.MapControllers();
             });
+
+            StripeConfiguration.ApiKey = Configuration.GetValue<string>("Stripe:SecretKey");
 
             ApplyMigration(app.ApplicationServices);
         }

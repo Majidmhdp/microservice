@@ -125,9 +125,9 @@ namespace MicroService.Services.CouponAPI
                 endpoints.MapControllers();
             });
 
-            ApplyMigration(app.ApplicationServices);
+            Stripe.StripeConfiguration.ApiKey = Configuration.GetValue<string>("Stripe:SecretKey");
 
-            
+            ApplyMigration(app.ApplicationServices);
         }
 
         public void ApplyMigration(IServiceProvider serviceProvider)

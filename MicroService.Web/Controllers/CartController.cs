@@ -5,6 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using MicroService.Web.Models;
+using MicroService.Web.Models.Utility;
 using MicroService.Web.Service.IService;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
@@ -51,9 +52,40 @@ namespace MicroService.Web.Controllers
             if (response != null && response.IsSuccess)
             {
                 //stripe
+
+                var domain = Request.Scheme + "://" + Request.Host.Value + "/";
+
+                StripeRequestDto stripeRequestDto = new StripeRequestDto()
+                {
+                    ApprovedUrl = domain + "cart/Confirmation?orderId=" + orderHeaderDto.OrderHeaderId,
+                    CancelUrl = domain + "cart/Checkout",
+                    OrderHeader = orderHeaderDto
+                };
+
+                var stripeResponse = await _orderService.CreateStripeSession(stripeRequestDto);
+                StripeRequestDto stripeResponseResult = JsonConvert.DeserializeObject<StripeRequestDto>(Convert.ToString(stripeResponse.Result));
+
+                Response.Headers.Add("Location", stripeResponseResult.StripeSessionUrl);
+                return new StatusCodeResult(303); 
             }
 
             return View();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Confirmation(int orderId)
+        {
+            ResponseDto? response = await _orderService.ValidateStripeSession(orderId);
+            if (response != null && response.IsSuccess)
+            {
+                OrderHeaderDto orderHeaderDto = JsonConvert.DeserializeObject<OrderHeaderDto>(Convert.ToString(response.Result));
+                if (orderHeaderDto.Status == SD.Status_Approved)
+                {
+                    return View(orderId);
+                }
+            }
+             
+            return View(orderId);
         }
 
         public async Task<IActionResult> Remove(int cartDetailsId)
