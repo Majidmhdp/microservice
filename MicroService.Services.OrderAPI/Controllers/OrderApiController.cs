@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using MicroService.MessageBus;
 using MicroService.Services.OrderAPI.Data;
 using MicroService.Services.OrderAPI.Model;
 using MicroService.Services.OrderAPI.Model.Dto;
 using MicroService.Services.OrderAPI.Services.IService;
 using MicroService.Services.OrderAPI.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 using Stripe;
 using Stripe.Checkout;
 
@@ -24,13 +26,17 @@ namespace MicroService.Services.OrderAPI.Controllers
         private IMapper _mapper;
         private readonly AppDbContext _db;
         private IProductService _productService;
+        private readonly IMessageBus _messageBus;
+        private readonly IConfiguration _configuration;
 
-        public OrderApiController(AppDbContext db, IProductService productService, IMapper mapper)
+        public OrderApiController(AppDbContext db, IProductService productService, IMapper mapper, IMessageBus messageBus, IConfiguration configuration)
         {
             _db = db;
             this._response = new ResponseDto();
             _productService = productService;
             _mapper = mapper;
+            _messageBus = messageBus;
+            _configuration = configuration;
         }
 
         [Authorize]
@@ -154,6 +160,16 @@ namespace MicroService.Services.OrderAPI.Controllers
                     orderHeader.PaymentIntentId = paymentIntent.Id;
                     orderHeader.Status = SD.Status_Approved;
                     _db.SaveChanges();
+
+                    RewardsDto rewardsDto = new RewardsDto()
+                    {
+                        OrderId = orderHeader.OrderHeaderId,
+                        RewardsActivity = Convert.ToInt32(orderHeader.OrderTotal),
+                        UserId = orderHeader.UserId
+                    };
+
+                    string topicName = _configuration.GetValue<string>("TopicAndQueueNames:OrderCreatedTopic");
+                    _messageBus.PublicMessage(rewardsDto, topicName);
 
                     _response.Result = _mapper.Map<OrderHeaderDto>(orderHeader);
                 }

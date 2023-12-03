@@ -73,3 +73,4 @@ D:\Project\MicroService\MicroService.Services.OrderAPI\bin\Debug\net5.0\Microsof
 D:\Project\MicroService\MicroService.Services.OrderAPI\bin\Debug\net5.0\System.Memory.Data.dll
 D:\Project\MicroService\MicroService.Services.OrderAPI\bin\Debug\net5.0\MicroService.MessageBus.dll
 D:\Project\MicroService\MicroService.Services.OrderAPI\bin\Debug\net5.0\MicroService.MessageBus.pdb
+D:\Project\MicroService\MicroService.Services.OrderAPI\bin\Debug\net5.0\Stripe.net.dll

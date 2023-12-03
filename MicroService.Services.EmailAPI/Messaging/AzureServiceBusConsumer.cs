@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Azure.Messaging.ServiceBus;
+using MicroService.Services.EmailAPI.Message;
 using MicroService.Services.EmailAPI.Models.Dto;
 using MicroService.Services.EmailAPI.Service;
 using Microsoft.Extensions.Configuration;
@@ -16,11 +17,17 @@ namespace MicroService.Services.EmailAPI.Messaging
         private readonly string serviceBusConnectionString;
         private readonly string emailCartQueue;
         private readonly string registerUserQueue;
+
+        private readonly string orderCreated_Topic;
+        private readonly string orderCreated_Email_Subscription;
+
         private readonly IConfiguration _configuration;
         private readonly EmailService _emailService;
 
         private ServiceBusProcessor _emailCartProcessor;
         private ServiceBusProcessor _registerUserProccessor;
+
+        private ServiceBusProcessor _registerOrderPlacedProccessor;
 
         public AzureServiceBusConsumer(IConfiguration configuration, EmailService emailService)
         {
@@ -32,9 +39,14 @@ namespace MicroService.Services.EmailAPI.Messaging
             emailCartQueue = _configuration.GetValue<string>("TopicAndQueueNames:EmailShoppingCartQueue");
             registerUserQueue = _configuration.GetValue<string>("TopicAndQueueNames:RegisterUserQueue");
 
+            orderCreated_Topic = _configuration.GetValue<string>("TopicAndQueueNames:OrderCreatedTopics");
+            orderCreated_Email_Subscription = _configuration.GetValue<string>("TopicAndQueueNames:orderEmailSubscriptionName");
+
             var client = new ServiceBusClient(serviceBusConnectionString);
             _emailCartProcessor = client.CreateProcessor(emailCartQueue);
             _registerUserProccessor = client.CreateProcessor(registerUserQueue);
+
+            _registerOrderPlacedProccessor = client.CreateProcessor(orderCreated_Topic, orderCreated_Email_Subscription);
         }
 
         public async Task Start()
@@ -49,6 +61,11 @@ namespace MicroService.Services.EmailAPI.Messaging
             _registerUserProccessor.ProcessErrorAsync += ErrorHandler;
 
             await _registerUserProccessor.StartProcessingAsync();
+
+            _registerOrderPlacedProccessor.ProcessMessageAsync += OnOrderPlacedRequestReceived;
+            _registerOrderPlacedProccessor.ProcessErrorAsync += ErrorHandler;
+
+            await _registerOrderPlacedProccessor.StartProcessingAsync();
         }
 
       
@@ -59,6 +76,9 @@ namespace MicroService.Services.EmailAPI.Messaging
 
             await _registerUserProccessor.StopProcessingAsync();
             await _registerUserProccessor.DisposeAsync();
+
+            await _registerOrderPlacedProccessor.StopProcessingAsync();
+            await _registerOrderPlacedProccessor.DisposeAsync();
         }
 
         private Task ErrorHandler(ProcessErrorEventArgs arg)
@@ -85,6 +105,24 @@ namespace MicroService.Services.EmailAPI.Messaging
             }
         }
 
+        private async Task OnOrderPlacedRequestReceived(ProcessMessageEventArgs args)
+        {
+            var message = args.Message;
+            var body = Encoding.UTF8.GetString(message.Body);
+
+            RewardsMessage objMessage = JsonConvert.DeserializeObject<RewardsMessage>(body);
+
+            try
+            {
+                await _emailService.LogOrderPlaced(objMessage);
+                await args.CompleteMessageAsync(args.Message);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         private async Task OnUserRegisterRequestReceived(ProcessMessageEventArgs args)
         {
             var message = args.Message;
@@ -102,7 +140,6 @@ namespace MicroService.Services.EmailAPI.Messaging
                 throw;
             }
         }
-
 
     }
 }

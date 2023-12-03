@@ -9,3 +9,4 @@ D:\Project\MicroService\MicroService.MessageBus\obj\Debug\net5.0\MicroService.Me
 D:\Project\MicroService\MicroService.MessageBus\obj\Debug\net5.0\MicroService.MessageBus.dll
 D:\Project\MicroService\MicroService.MessageBus\obj\Debug\net5.0\ref\MicroService.MessageBus.dll
 D:\Project\MicroService\MicroService.MessageBus\obj\Debug\net5.0\MicroService.MessageBus.pdb
+D:\Project\MicroService\MicroService.MessageBus\obj\Debug\net5.0\MicroService.MessageBus.csproj.AssemblyReference.cache

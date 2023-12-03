@@ -64,3 +64,5 @@ D:\Project\MicroService\MicroService.Services.CouponAPI\obj\Debug\net5.0\MicroSe
 D:\Project\MicroService\MicroService.Services.CouponAPI\obj\Debug\net5.0\ref\MicroService.Services.CouponAPI.dll
 D:\Project\MicroService\MicroService.Services.CouponAPI\obj\Debug\net5.0\MicroService.Services.CouponAPI.pdb
 D:\Project\MicroService\MicroService.Services.CouponAPI\obj\Debug\net5.0\MicroService.Services.CouponAPI.genruntimeconfig.cache
+D:\Project\MicroService\MicroService.Services.CouponAPI\bin\Debug\net5.0\Newtonsoft.Json.dll
+D:\Project\MicroService\MicroService.Services.CouponAPI\bin\Debug\net5.0\Stripe.net.dll
