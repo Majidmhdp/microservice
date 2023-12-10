@@ -12,6 +12,7 @@ using MicroService.Services.OrderAPI.Model.Dto;
 using MicroService.Services.OrderAPI.Services.IService;
 using MicroService.Services.OrderAPI.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Stripe;
 using Stripe.Checkout;
@@ -37,6 +38,58 @@ namespace MicroService.Services.OrderAPI.Controllers
             _mapper = mapper;
             _messageBus = messageBus;
             _configuration = configuration;
+        }
+
+
+        [Authorize]
+        [HttpGet("GetOrders")]
+        public ResponseDto? GetOrders(string? userId = "")
+        {
+            try
+            {
+                IEnumerable<OrderHeader> objList;
+                if (User.IsInRole(SD.RoleAdmin))
+                {
+                    objList = _db.OrderHeaders.Include(s => s.OrderDetails).OrderByDescending(s => s.OrderHeaderId)
+                        .ToList();
+                }
+                else
+                {
+                    objList = _db.OrderHeaders.Include(s => s.OrderDetails)
+                        .Where(s=>s.UserId == userId)
+                        .OrderByDescending(s => s.OrderHeaderId)
+                        .ToList();
+                }
+
+                _response.Result = _mapper.Map<IEnumerable<OrderHeaderDto>>(objList);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+
+            return _response;
+        }
+
+        [Authorize]
+        [HttpGet("GetOrder/{id:int}")]
+        public ResponseDto? GetOrder(int id)
+        {
+            try
+            {
+                OrderHeader orderHeader =
+                    _db.OrderHeaders.Include(s => s.OrderDetails).First(s => s.OrderHeaderId == id);
+
+                _response.Result = _mapper.Map<OrderHeaderDto>(orderHeader);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+
+            return _response;
         }
 
         [Authorize]
@@ -178,6 +231,39 @@ namespace MicroService.Services.OrderAPI.Controllers
             {
                 _response.Message = ex.Message;
                 _response.IsSuccess = false;
+            }
+
+            return _response;
+        }
+
+        [Authorize]
+        [HttpPost("UpdateOrderStatus/{orderId:int}")]
+        public ResponseDto? UpdateOrderStatus(int orderId, [FromBody] string newStatus)
+        {
+            try
+            {
+                OrderHeader orderHeader = _db.OrderHeaders.First(s => s.OrderHeaderId == orderId);
+
+                if (newStatus == SD.Status_Cancelled)
+                {
+                    //Refound
+                    var options = new RefundCreateOptions()
+                    {
+                        Reason = RefundReasons.RequestedByCustomer,
+                        PaymentIntent = orderHeader.PaymentIntentId
+                    };
+
+                    var service = new RefundService();
+                    Refund refund = service.Create(options);
+                }
+
+                orderHeader.Status = newStatus;
+                _db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
             }
 
             return _response;

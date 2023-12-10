@@ -59,3 +59,5 @@ D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\ref\MicroService.Web.d
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\MicroService.Web.pdb
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\MicroService.Web.genruntimeconfig.cache
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Cart\Confirmation.cshtml.g.cs
+D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Order\OrderIndex.cshtml.g.cs
+D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Order\OrderDetail.cshtml.g.cs

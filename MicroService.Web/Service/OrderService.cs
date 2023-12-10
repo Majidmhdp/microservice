@@ -47,5 +47,34 @@ namespace MicroService.Web.Service
                 Url = SD.OrderApiBase + "/api/order/ValidateStripeSession"
             });
         }
+
+        public async Task<ResponseDto> GetAllOrder(string userId)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = SD.ApiType.GET,
+                Url = SD.OrderApiBase + "/api/order/GetOrders/" + userId
+            });
+        }
+
+        public async Task<ResponseDto> GetOrder(int orderId)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = SD.ApiType.GET,
+                Url = SD.OrderApiBase + "/api/order/GetOrder/" + orderId
+            });
+        }
+
+        public async Task<ResponseDto> UpdateOrderStatus(int orderId, string newStatus)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = SD.ApiType.POST,
+                Date = newStatus,
+                Url = SD.OrderApiBase + "/api/order/UpdateOrderStatus/"+ orderId
+            });
+            
+        }
     }
 }
