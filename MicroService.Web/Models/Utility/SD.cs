@@ -34,5 +34,11 @@ namespace MicroService.Web.Models.Utility
         public const string Status_Completed = "Completed";
         public const string Status_Refunded = "Refunded";
         public const string Status_Cancelled = "Cancelled";
+
+        public enum ContentType
+        {
+            Json,
+            MultipartFormData
+        }
     }
 }

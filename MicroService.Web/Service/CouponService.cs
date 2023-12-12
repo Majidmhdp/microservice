@@ -23,7 +23,7 @@ namespace MicroService.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = SD.ApiType.POST,
-                Date = couponDto,
+                Data = couponDto,
                 Url = SD.CouponApiBase + "/api/CouponApi"
             });
         }
@@ -73,7 +73,7 @@ namespace MicroService.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = SD.ApiType.PUT,
-                Date = couponDto,
+                Data = couponDto,
                 Url = SD.CouponApiBase + "/api/CouponApi"
             });
         }

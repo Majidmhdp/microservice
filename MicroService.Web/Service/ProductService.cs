@@ -23,8 +23,9 @@ namespace MicroService.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = SD.ApiType.POST,
-                Date = productDto,
-                Url = SD.ProductApiBase + "/api/ProductApi"
+                Data = productDto,
+                Url = SD.ProductApiBase + "/api/ProductApi",
+                ContentType = SD.ContentType.MultipartFormData
             }, withBearer: true);
         }
 
@@ -63,8 +64,9 @@ namespace MicroService.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = SD.ApiType.PUT,
-                Date = productDto,
-                Url = SD.ProductApiBase + "/api/ProductApi"
+                Data = productDto,
+                Url = SD.ProductApiBase + "/api/ProductApi",
+                ContentType = SD.ContentType.MultipartFormData
             }, withBearer: true);
         }
 

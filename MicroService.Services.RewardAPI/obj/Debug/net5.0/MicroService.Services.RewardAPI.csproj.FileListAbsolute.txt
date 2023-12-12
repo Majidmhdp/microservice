@@ -70,3 +70,4 @@ D:\Project\MicroService\MicroService.Services.RewardAPI\obj\Debug\net5.0\MicroSe
 D:\Project\MicroService\MicroService.Services.RewardAPI\obj\Debug\net5.0\ref\MicroService.Services.RewardAPI.dll
 D:\Project\MicroService\MicroService.Services.RewardAPI\obj\Debug\net5.0\MicroService.Services.RewardAPI.pdb
 D:\Project\MicroService\MicroService.Services.RewardAPI\obj\Debug\net5.0\MicroService.Services.RewardAPI.genruntimeconfig.cache
+D:\Project\MicroService\MicroService.Services.RewardAPI\obj\Debug\net5.0\MicroService.Services.RewardAPI.csproj.AssemblyReference.cache

@@ -32,7 +32,7 @@ namespace MicroService.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = SD.ApiType.POST,
-                Date = cartDto,
+                Data = cartDto,
                 Url = SD.ShoppingCartApiBase + "/api/cart/CartUpsert"
             });
         }
@@ -42,7 +42,7 @@ namespace MicroService.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = SD.ApiType.POST,
-                Date = cartDetailsId,
+                Data = cartDetailsId,
                 Url = SD.ShoppingCartApiBase + "/api/cart/RemoveCart"
             });
         }
@@ -52,7 +52,7 @@ namespace MicroService.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = SD.ApiType.POST,
-                Date = cartDto,
+                Data = cartDto,
                 Url = SD.ShoppingCartApiBase + "/api/cart/ApplyCoupon"
             });
         }
@@ -62,7 +62,7 @@ namespace MicroService.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = SD.ApiType.POST,
-                Date = cartDto,
+                Data = cartDto,
                 Url = SD.ShoppingCartApiBase + "/api/cart/EmailCartRequest"
             });
         }

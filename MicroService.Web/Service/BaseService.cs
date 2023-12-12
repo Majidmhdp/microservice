@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MicroService.Web.Models;
 using MicroService.Web.Models.Utility;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace MicroService.Web.Service
@@ -36,9 +37,11 @@ namespace MicroService.Web.Service
 
                 HttpClient client = _httpClientFactory.CreateClient("MicroService");
                 HttpRequestMessage message = new HttpRequestMessage();
-                    //= null;
 
-                message.Headers.Add("Accept", "application/json");
+                message.Headers.Add("Accept",
+                    requestDto.ContentType == SD.ContentType.MultipartFormData 
+                        ? "*/*" : "application/json");
+
 
                 //token
                 if (withBearer)
@@ -49,10 +52,36 @@ namespace MicroService.Web.Service
 
                 message.RequestUri = new Uri(requestDto.Url);
 
-                if (requestDto.Date != null)
+                if (requestDto.ContentType == SD.ContentType.MultipartFormData)
                 {
-                    message.Content = new StringContent(JsonConvert.SerializeObject(requestDto.Date), Encoding.UTF8,
-                        "application/json");
+                    var content = new MultipartFormDataContent();
+
+                    foreach (var prop in requestDto.Data.GetType().GetProperties())
+                    {
+                        var value = prop.GetValue(requestDto.Data);
+                        if (value is FormFile)
+                        {
+                            var file = (FormFile)value;
+                            if (file != null)
+                            {
+                                content.Add(new StreamContent(file.OpenReadStream()), prop.Name, file.FileName);
+                            }
+                        }
+                        else
+                        {
+                            content.Add(new StringContent(value == null ? "" : value.ToString()), prop.Name);
+                        }
+                    }
+
+                    message.Content = content;
+                }
+                else
+                {
+                    if (requestDto.Data != null)
+                    {
+                        message.Content = new StringContent(JsonConvert.SerializeObject(requestDto.Data), Encoding.UTF8,
+                            "application/json");
+                    }
                 }
 
                 switch (requestDto.ApiType)

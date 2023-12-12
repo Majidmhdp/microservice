@@ -22,7 +22,7 @@ namespace MicroService.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = SD.ApiType.POST,
-                Date = registrationRequestDto,
+                Data = registrationRequestDto,
                 Url = SD.AuthApiBase + "/api/auth/assignrole"
             });
         }
@@ -32,7 +32,7 @@ namespace MicroService.Web.Service
             return await _baseService.SendAsync(new RequestDto()
                 {
                     ApiType = SD.ApiType.POST,
-                    Date = loginRequestDto,
+                    Data = loginRequestDto,
                     Url = SD.AuthApiBase + "/api/auth/login"
                 },
                 withBearer: false);
@@ -43,7 +43,7 @@ namespace MicroService.Web.Service
             return await _baseService.SendAsync(new RequestDto()
                 {
                     ApiType = SD.ApiType.POST,
-                    Date = registrationRequestDto,
+                    Data = registrationRequestDto,
                     Url = SD.AuthApiBase + "/api/auth/register"
                 },
                 withBearer: false);

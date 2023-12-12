@@ -72,3 +72,4 @@ D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\obj\Debug\net5.0\M
 D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\obj\Debug\net5.0\ref\MicroService.Services.ShoppingCartAPI.dll
 D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\obj\Debug\net5.0\MicroService.Services.ShoppingCartAPI.pdb
 D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\obj\Debug\net5.0\MicroService.Services.ShoppingCartAPI.genruntimeconfig.cache
+D:\Project\MicroService\MicroService.Services.ShoppingCartAPI\obj\Debug\net5.0\MicroService.Services.ShoppingCartAPI.csproj.AssemblyReference.cache

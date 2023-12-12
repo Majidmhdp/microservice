@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -66,15 +67,40 @@ namespace MicroService.Services.ProductAPI.Controllers
 
         [HttpPost]
         [Authorize(Roles = "ADMIN")]
-        public ResponseDto Post([FromBody] ProductDto couponDto)
+        public ResponseDto Post([FromForm] ProductDto productDto)
         {
             try
             {
-                var obj = _mapper.Map<Product>(couponDto);
-                _db.Products.Add(obj);
+                var product = _mapper.Map<Product>(productDto);
+                _db.Products.Add(product);
                 _db.SaveChanges();
 
-                _response.Result = couponDto;
+                if (productDto.Image != null)
+                {
+                    string fileName = product.ProductId + Path.GetExtension(productDto.Image.FileName);
+                    string filePath = @"wwwroot\ProductImages\" + fileName;
+                    var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), filePath);
+
+                    using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))
+                    {
+                        productDto.Image.CopyTo(fileStream);
+                    }
+
+                    var baseUrl =
+                        $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}{HttpContext.Request.PathBase.Value}";
+                    
+                    product.ImageUrl = baseUrl + "/ProductImages/" + fileName;
+                    product.ImageLocalPath = filePath;
+                }
+                else
+                {
+                    product.ImageUrl = "https://placehold.co/600x400";
+                }
+
+                _db.Products.Update(product);
+                _db.SaveChanges();
+
+                _response.Result = productDto;
             }
             catch (Exception ex)
             {
@@ -93,6 +119,17 @@ namespace MicroService.Services.ProductAPI.Controllers
             try
             {
                 var obj = _db.Products.First(s => s.ProductId == id);
+
+                if (!string.IsNullOrEmpty(obj.ImageLocalPath))
+                {
+                    var oldFilePath = Path.Combine(Directory.GetCurrentDirectory(), obj.ImageLocalPath);
+                    FileInfo file = new FileInfo(oldFilePath);
+                    if (file.Exists)
+                    {
+                        file.Delete();
+                    }
+                }
+
                 _db.Products.Remove(obj);
                 _db.SaveChanges();
             }
@@ -107,15 +144,44 @@ namespace MicroService.Services.ProductAPI.Controllers
 
         [HttpPut]
         [Authorize(Roles = "ADMIN")]
-        public ResponseDto Put([FromBody] ProductDto couponDto)
+        public ResponseDto Put([FromForm] ProductDto productDto)
         {
             try
             {
-                var obj = _mapper.Map<Product>(couponDto);
-                _db.Products.Update(obj);
+                var product = _mapper.Map<Product>(productDto);
+
+                if (productDto.Image != null)
+                {
+                    if (!string.IsNullOrEmpty(product.ImageLocalPath))
+                    {
+                        var oldFilePath = Path.Combine(Directory.GetCurrentDirectory(), product.ImageLocalPath);
+                        FileInfo file = new FileInfo(oldFilePath);
+                        if (file.Exists)
+                        {
+                            file.Delete();
+                        }
+                    }
+
+                    string fileName = product.ProductId + Path.GetExtension(productDto.Image.FileName);
+                    string filePath = @"wwwroot\ProductImages\" + fileName;
+                    var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), filePath);
+
+                    using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))
+                    {
+                        productDto.Image.CopyTo(fileStream);
+                    }
+
+                    var baseUrl =
+                        $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}{HttpContext.Request.PathBase.Value}";
+
+                    product.ImageUrl = baseUrl + "/ProductImages/" + fileName;
+                    product.ImageLocalPath = filePath;
+                }
+
+                _db.Products.Update(product);
                 _db.SaveChanges();
 
-                _response.Result = couponDto;
+                _response.Result = productDto;
             }
             catch (Exception ex)
             {
