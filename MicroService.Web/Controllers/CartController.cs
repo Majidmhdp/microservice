@@ -65,7 +65,9 @@ namespace MicroService.Web.Controllers
                 var stripeResponse = await _orderService.CreateStripeSession(stripeRequestDto);
                 StripeRequestDto stripeResponseResult = JsonConvert.DeserializeObject<StripeRequestDto>(Convert.ToString(stripeResponse.Result));
 
-                Response.Headers.Add("Location", stripeResponseResult.StripeSessionUrl);
+                //Response.Headers.Add("Location", stripeResponseResult.StripeSessionUrl);
+                Response.Headers.Add("Location", domain + "cart/Confirmation?orderId=" + orderHeaderDto.OrderHeaderId);
+
                 return new StatusCodeResult(303); 
             }
 

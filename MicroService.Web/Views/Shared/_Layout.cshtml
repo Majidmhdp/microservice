@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using MicroService.Web.Models.Utility
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -27,17 +29,21 @@
 				<li class="nav-item">
 					<a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
 				</li>
-				<div class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Content Management
-					</a>
-						
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<li><a class="dropdown-item" asp-controller="Coupon" asp-action="CouponIndex">Coupon</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" asp-controller="Product" asp-action="ProductIndex">Product</a></li>
+				
+				@if (User.IsInRole(SD.RoleAdmin))
+				{
+					<div class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Content Management
+						</a>
+
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<li><a class="dropdown-item" asp-controller="Coupon" asp-action="CouponIndex">Coupon</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" asp-controller="Product" asp-action="ProductIndex">Product</a></li>
+						</div>
 					</div>
-				</div>
+				}
 				<li class="nav-item">
 					<a class="nav-link" asp-area="" asp-controller="Order" asp-action="OrderIndex">
 						Manage Order

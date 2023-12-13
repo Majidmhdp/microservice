@@ -61,3 +61,15 @@ D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\MicroService.Web.genru
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Cart\Confirmation.cshtml.g.cs
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Order\OrderIndex.cshtml.g.cs
 D:\Project\MicroService\MicroService.Web\obj\Debug\net5.0\Razor\Views\Order\OrderDetail.cshtml.g.cs
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.Extensions.Configuration.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.Extensions.Configuration.Json.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Physical.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.Extensions.FileSystemGlobbing.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\System.Text.Encodings.Web.dll
+D:\Project\MicroService\MicroService.Web\bin\Debug\net5.0\System.Text.Json.dll

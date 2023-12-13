@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using MicroService.Web.Models;
 using MicroService.Web.Models.Utility;
 using MicroService.Web.Service.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Newtonsoft.Json;
 
 namespace MicroService.Web.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IOrderService _orderService;
@@ -19,6 +21,7 @@ namespace MicroService.Web.Controllers
             _orderService = orderService;
         }
 
+        
         public IActionResult OrderIndex()
         {
             return View();
